@@ -48,7 +48,7 @@ module simulate
 			character*80 scn
 			integer i, e, s
 			scenario = scn
-			path = '/users/michaud/perso/emetrics/know'		
+			path = '../'		
 			write(*,*) '+ running scenario : ', scenario
 			
 			write(*,*) '	* compiling main program (need mpif90) ...'
@@ -412,7 +412,7 @@ module simulate
 			if (irun.eq.1) then
 			    write(*,*) '	* running simulation (need mpi) ...'
 			    write(*,*) ''
-			    call system('mpirun -machinefile mf -n 60 '//trim(path)//'build/run')
+			    call system('mpirun -n 10 ./run')
 			end if
 			open(1,file=trim(path)//'data/simulations/simknow_'//trim(scenario)//'.dat')
 			read(1,*) nobs

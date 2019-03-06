@@ -116,7 +116,7 @@ contains
 	subroutine initpar
 	    integer e
 		! assignment of structural parameters from file 	
-		open(unit=1, file='/users/michaud/perso/emetrics/know/params/structural-parameters.asc')
+		open(unit=1, file='../params/structural-parameters.asc')
 		read(1,*) beta_0
 		read(1,*) gamma_0
 		read(1,*) pi0
@@ -134,7 +134,7 @@ contains
 		read(1,*) theta
 		close(unit=1)
 		! assignment of other parameters from file
-		open(unit=1, file='/users/michaud/perso/emetrics/know/params/other-parameters.asc')
+		open(unit=1, file='../params/other-parameters.asc')
 		read(1,*) amin
 		read(1,*) amax
 		read(1,*) fmin
@@ -148,7 +148,7 @@ contains
 		read(1,*) rhoe
 		close(unit=1)
 		! assignment of dimensions (grid, nsim) from file
-		open(unit=1, file='/users/michaud/perso/emetrics/know/params/dimensions-parameters.asc')
+		open(unit=1, file='../params/dimensions-parameters.asc')
 		read(1,*) T
 		read(1,*) ny
 		read(1,*) no
@@ -160,7 +160,7 @@ contains
 		read(1,*) nsim
 		close(unit=1)		
 		! assignment of scenario parameters from file
-		open(unit=1, file='/users/michaud/perso/emetrics/know/params/scenario-parameters.asc')			
+		open(unit=1, file='../params/scenario-parameters.asc')			
 		read(1,*) scenario
 		read(1,*) issgen
 		read(1,*) ifin	
@@ -211,14 +211,14 @@ contains
         gamma(:) = gamma_0
         
 		if (icagetti.eq.1) then
-		    open(1,file='/users/michaud/perso/emetrics/know/params/cag2003.csv')
+		    open(1,file='../params/cag2003.csv')
             do e = 1, ne, 1
     		    read(1,*) beta(e),gamma(e)        
             end do
             close(1)
 		end if
 		if (igparker.eq.1) then
-		    open(1,file='/users/michaud/perso/emetrics/know/params/gp2002.csv')
+		    open(1,file='../params/gp2002.csv')
             do e = 1, ne, 1
     		    read(1,*) beta(e),gamma(e)        
             end do	
@@ -229,7 +229,7 @@ contains
 		rra = 0.25d0
 		
 		! set path 
-		path = '/users/michaud/perso/emetrics/know'
+		path = ''
 		! minimum utility
 		umin = -10.0d6		
 		if (ismaster) then
@@ -299,7 +299,7 @@ contains
 		end if
 		! loading mortality profiles
 		allocate(mort(T,ne))
-		open(unit=2,file='/users/michaud/perso/emetrics/know/params/mortality-par.csv') 
+		open(unit=2,file='../params/mortality-par.csv') 
 		! reading header
 		read(2,*)
 		do i =  1 ,T, 1 
@@ -319,7 +319,7 @@ contains
 		end if
 		allocate(eq(T,ne))
 		! loading coefficients
-		open(unit=3,file='/users/michaud/perso/emetrics/know/params/equivalence-par.csv') 
+		open(unit=3,file='../params/equivalence-par.csv') 
 		read(3,*) 
 		do i =  1 ,T 
 			read(3,*) eq(i,:)	
@@ -376,7 +376,7 @@ contains
 		allocate(cumproby(ne,ny,ny))
 
 		! read parameters		
-		open(unit=1, file='/users/michaud/perso/emetrics/know/params/income-work-par.csv')
+		open(unit=1, file='../params/income-work-par.csv')
 		read(1,*) 
 		do i = 1, 6, 1
 			read(1,*) bw(i,:)
@@ -431,7 +431,7 @@ contains
 
 		! input retirement income
 		! read parameters		
-		open(unit=1, file='/users/michaud/perso/emetrics/know/params/income-ret-par.csv')
+		open(unit=1, file='../params/income-ret-par.csv')
 		read(1,*) ; ! reading header
 		do i = 1, 36, 1
 			read(1,*) br(i,:)
@@ -458,7 +458,7 @@ contains
 		allocate(cumprobo(ne,no,no))
 
 		! read parameters		
-		open(unit=2, file='/users/michaud/perso/emetrics/know/params/oop-par.csv')
+		open(unit=2, file='../params/oop-par.csv')
 		read(2,*) 
 		do i = 1, 6, 1
 			read(2,*) bo(i,:)
@@ -1272,7 +1272,7 @@ contains
 		double precision inc(ne), x(ne)
 		if (ismaster) then		
 			! consumption by wealth and education
-			open(1, file='/users/michaud/perso/emetrics/know/data/simulations/cons_'//trim(scenario)//'.txt')				
+			open(1, file='../data/simulations/cons_'//trim(scenario)//'.txt')				
 			s = 20
 			y = nint(dble(ny/2))
 			o = int(dble(no)/2.0d0)+1
@@ -1295,7 +1295,7 @@ contains
 			close(1)
 
 			! portfolio share by wealth and education
-			open(1, file='/users/michaud/perso/emetrics/know/data/simulations/share_'//trim(scenario)//'.txt')				
+			open(1, file='../data/simulations/share_'//trim(scenario)//'.txt')				
 			s = 20
 			y = nint(dble(ny/2))
 			o = int(dble(no)/2.0d0)+1
@@ -1312,7 +1312,7 @@ contains
 			close(1)
 
 			! investment in i by wealth and education
-			open(1, file='/users/michaud/perso/emetrics/know/data/simulations/invest_'//trim(scenario)//'.txt')				
+			open(1, file='../data/simulations/invest_'//trim(scenario)//'.txt')				
 			s = 20
 			y = nint(dble(ny/2))
 			o = int(dble(no)/2.0d0)+1
@@ -1347,22 +1347,22 @@ contains
 			nobs = 0
 			
 			! load draws
-			open(1,file=trim(path)//'/data/simulations/rdraws.dat')
+			open(1,file='../data/simulations/rdraws.dat')
 			do i = 1, nsim, 1
 				read(1,*) rdraws(i,:)
 			end do
 			close(1)
-			open(1,file=trim(path)//'/data/simulations/odraws.dat')
+			open(1,file='../data/simulations/odraws.dat')
 			do i = 1, nsim, 1
 				read(1,*) odraws(i,:)
 			end do
 			close(1)
-			open(1,file=trim(path)//'/data/simulations/ydraws.dat')
+			open(1,file='../data/simulations/ydraws.dat')
 			do i = 1, nsim, 1
 				read(1,*) ydraws(i,:)
 			end do
 			close(1)
-			open(1,file=trim(path)//'/data/simulations/mdraws.dat')
+			open(1,file='../data/simulations/mdraws.dat')
 			do i = 1, nsim, 1
 				read(1,*) mdraws(i,:)
 			end do
@@ -1387,7 +1387,7 @@ contains
 		
 			write(*,*) '- will now simulate synthetic cohort ...'
 						
-			open(unit=3,file='/users/michaud/perso/emetrics/know/params/initsample.csv') 
+			open(unit=3,file='../params/initsample.csv') 
 			read(3,*) header
 			
 			do i = 1, nsim, 1
@@ -1575,7 +1575,7 @@ contains
 					
 			write(*,*) '- cohort simulated, saving dataset ...'
 							
-			open (8,file='/users/michaud/perso/emetrics/know/data/simulations/simknow_'//trim(scenario)//'.dat')
+			open (8,file='../data/simulations/simknow_'//trim(scenario)//'.dat')
 			write(8,*) nobs
 			do i=1,nsim,1
 				do s = 1, T-1, 1

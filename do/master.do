@@ -9,7 +9,7 @@ set more off
 set processors 4
 
 * --- home directory of project
-cd ~/perso/emetrics/know
+cd ~/know
 
 * global options for graphs
 global bgd "plotregion(fcolor(white))   graphregion(fcolor(white) color(white))" 
