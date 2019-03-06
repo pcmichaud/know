@@ -1,0 +1,142 @@
+------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/michaud/Dropbox (Personal)/emetrics/know/logs/construct_nf
+> cs.txt
+  log type:  text
+ opened on:  15 Oct 2015, 11:41:20
+
+. 
+. use data/nfcs/nfcs2012.dta, clear
+
+. * sample selection
+. drop if age5==18
+(2581 observations deleted)
+
+. gen sample = 1
+
+. replace sample = 0 if white!=1
+(5769 real changes made)
+
+. replace sample = 0 if male!=1
+(9002 real changes made)
+
+. 
+. recode education (1=1) (2/3=2)  (4/5=3)
+(education: 15693 changes made)
+
+. label define educ 1 "<HS" 2 "HS" 3 "College+"
+
+. label values education educ
+
+. 
+. replace index3 = index3==3 if index3!=.
+(20476 real changes made)
+
+. replace index5 = index5==5 if index5!=.
+(21604 real changes made)
+
+. label var index5 "fraction all right"
+
+. *replace year = 2012 if year==2009
+. 
+. recode savings_counseling (1=1) (2=0) (98=0) (99=0) (else=.), gen(advice)
+(15812 differences between savings_counseling and advice)
+
+. 
+.         capture gen one = 1
+
+.         preserve
+
+.                 collapse index5 [aw=weight] if sample==1, by(education age5)
+
+.                 
+.                 forvalues e = 1/3 {
+  2.                         lowess index5 age5 if education==`e', gen(sindex5
+> _`e') nodraw bw(0.6)
+  3.                 }
+
+.                 #d ;
+delimiter now ;
+.                 twoway (line sindex5_1 age5)
+>                            (line sindex5_2 age5)
+>                            (line sindex5_3 age5),
+>                            legend(label(1 "<HS") label(2 "HS") label(3 "Coll
+> ege+") 
+>                                 size(small) rows(1))
+>                                 ylabel(,labsize(vsmall)) 
+>                                 xtitle("age", size(small)) ytitle("fraction 
+> ", size(small)) $bgd 
+>                                 xlabel(25(5)65,labsize(vsmall)) name(gindex5
+> );
+
+.                                 #d cr           
+delimiter now cr
+.         restore
+
+.         
+.         preserve
+
+.                 collapse advice [aw=weight] if sample==1, by(education) 
+
+.                 #d ;
+delimiter now ;
+.                 graph bar advice, 
+>                 over(education,relabel(1 "<HS" 2 "HS" 3 "College+")) name(ga
+> dvice) 
+>                         blabel(bar, format(%6.3f)) ytitle("Fraction using fi
+> nancial advisor") $bgd;
+
+.                 #d cr
+delimiter now cr
+. 
+.         restore 
+
+.                 
+.         di "test of interaction terms"
+test of interaction terms
+
+.         reg index5 age ib1.education ib1.education#c.age [aw=weight] if samp
+> le==1
+(sum of wgt is   7.7220e+03)
+
+      Source |       SS       df       MS              Number of obs =    8157
+-------------+------------------------------           F(  5,  8151) =  163.80
+       Model |  133.985761     5  26.7971521           Prob > F      =  0.0000
+    Residual |  1333.45561  8151  .163594113           R-squared     =  0.0913
+-------------+------------------------------           Adj R-squared =  0.0907
+       Total |  1467.44137  8156  .179921698           Root MSE      =  .40447
+
+------------------------------------------------------------------------------
+      index5 |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         age |   .0028128   .0011069     2.54   0.011      .000643    .0049827
+             |
+   education |
+         HS  |   .0659174   .0576919     1.14   0.253    -.0471734    .1790082
+   College+  |   .1946837   .0618108     3.15   0.002     .0735186    .3158487
+             |
+   education#|
+       c.age |
+         HS  |   .0012959   .0011756     1.10   0.270    -.0010086    .0036004
+   College+  |    .002982   .0012464     2.39   0.017     .0005388    .0054253
+             |
+       _cons |  -.0892841   .0537121    -1.66   0.096    -.1945735    .0160054
+------------------------------------------------------------------------------
+
+.         testparm ib1.education#c.age    
+
+ ( 1)  2.education#c.age = 0
+ ( 2)  3.education#c.age = 0
+
+       F(  2,  8151) =    4.20
+            Prob > F =    0.0150
+
+. 
+.         
+.         graph combine gindex5 gadvice, rows(1) $bgd
+
+.         graph export "figures/fig3.png", as(png) replace
+(file figures/fig3.png written in PNG format)
+
+. 
+.         capture log close

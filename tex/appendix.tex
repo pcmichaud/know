@@ -1,0 +1,324 @@
+\documentclass[10pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry} 
+
+               		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps¬ß with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex	
+\usepackage[urlcolor=magenta]{hyperref}									
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{chngcntr}
+\title{Online Appendix for: Optimal Financial Knowledge and Wealth Inequality}
+\author{Annamaria Lusardi, Pierre-Carl Michaud and Olivia S. Mitchell}
+\date{October 2015}							% Activate to display a given date or no date
+
+\setcounter{table}{0}
+\makeatletter 
+\renewcommand{\thetable}{B\arabic{table}}
+
+\begin{document}
+\maketitle
+%\section{}
+%\subsection{}
+This online appendix contains additional results of simulations reported in the text. In the first part, we present results for three extensions discussed in the text: a simulation where we only allow for initial differences in financial knowledge but no accumulation (or decumulation) during the life-cycle, a second reporting results of policy simulations with learning-by-doing instead of the investment mechanism used in our preferred specification and last, a table reporting detailed results for a simulation with decreasing relative risk aversion. The second part reports all parameter values used in baseline specification of the model. The third part contains detailed simulation results for each of the simulations reported in the tables and figures. We report estimates for five-year age groups from age 35 to 75 and for all three education groups. 
+
+
+\section*{Part 1: Detailed Results for Extensions}
+
+\begin{table}[H]
+\centering
+\input{appendix_genes.tex}
+\caption{\textbf{Statistics from baseline scenario adding differences in initial financial knowledge}. We take initial levels of financial knowledge from Figure 3 using the 2012 NFCS (0 for less than high school, 6.2 for high school graduates and 21.5\% for college graduates).  We report median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income. The ratio of wealth-to-income for college + graduates to high school dropouts is 1.76.}
+\end{table}
+
+\pagebreak
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc} \hline \hline
+ & $<$HS  & HS  & College +  & Ratio (College +/$<$HS)  \\  \hline 
+\textit{Baseline} &          &          &          &          \\ 
+Median wealth &    164679 &    271539 &    416553 &     2.529 \\  
+Wealth-to-Income Ratio  &     5.182 &     7.016 &     8.772 &     1.693 \\  
+Fraction Poor $(a_t<2y_t)$&     .2591 &     .1434 &    .06196 &     .2391 \\  
+Participation $(\kappa_t>0)$ &     .7678 &     .8941 &      .946 &     1.232 \\  
+Low FK ($f_t<25$) &     .1329 &    .04698 &    .01879 &     .1414 \\ 
+\hline
+\textit{Reduced Floor} ($c_{\min}$) &          &          &          &          \\  
+Median wealth &    177945 &    280858 &    424715 &     2.387 \\  
+Wealth-to-Income Ratio  &     5.599 &     7.257 &     8.944 &     1.597 \\  
+Fraction Poor $(a_t<2y_t)$ &     .2326 &     .1222 &    .04774 &     .2053 \\  
+Participation $(\kappa_t>0)$ &     .8035 &     .9264 &     .9661 &     1.202 \\  
+Low FK ($f_t<25$)&     .1146 &     .0277 &    .00711 &    .06203 \\  
+\hline
+\textit{Reduced Retirement Income} &          &          &          &          \\  
+Median wealth &    194114 &    319103 &    474037 &     2.442 \\  
+Wealth-to-Income Ratio &     6.322 &     8.551 &     10.36 &     1.639 \\  
+Fraction Poor $(a_t<2y_t)$ &      .191 &     .0727 &    .02082 &      .109 \\  
+Participation $(\kappa_t>0)$ &     .8046 &     .9364 &     .9663 &     1.201 \\  
+Low FK ($f_t<25$) &     .1213 &    .02324 &   .005079 &    .04188 \\  
+\hline \hline \end{tabular}
+\caption{Policy simulations with learning by doing ($\phi = 10$)}
+\end{table}
+
+\pagebreak
+
+\begin{table}[H]
+\centering
+\input{appendix_drra2.tex}
+\caption{\textbf{Statistics from scenario with decreasing relative risk aversion}. We report median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\pagebreak
+
+\section*{Part 2: Baseline Parameter Values}
+
+The following parameters are used in the baseline scenario. 
+
+\begin{table}[H]
+\centering
+\begin{tabular}{clr}
+\hline \hline
+Parameter & Definition & Value \\
+\hline 
+$\sigma$ & relative risk aversion & 1.6\tabularnewline
+$\beta$ & discount factor & 0.96\tabularnewline
+$\overline{r}$ & safe return & 0.02\tabularnewline
+$\sigma_{\epsilon}$ & standard deviation returns & 0.16 \tabularnewline
+$r(f_{max})$ & maximum excess return & 0.04\tabularnewline
+$\pi_{0}$ & productivity of investment function ($\pi(i_t) = \pi_0 i_t ^ {\pi_1}$) & 50\tabularnewline
+$\pi_{1}$ & concavity of investment function & 1.75\tabularnewline
+$c_{d}$ & participation cost & 750\tabularnewline
+$\delta$ & depreciate rate & 0.06\tabularnewline
+$c_{min}$ & consumption floor & 10,000\tabularnewline
+$\rho_{y}$ & autocorrelation income & 0.95 \tabularnewline
+$\sigma_{y,\epsilon}^2$ & variance innovation income (less HS, HS, college +) & (.033,.025,.016) \tabularnewline
+$\rho_{o}$ & autocorrelation out-of-pocket & 0.901 \tabularnewline
+$\sigma_{o,\epsilon}^2$ & variance innovation out-of-pocket (less HS, HS, college +) & (.175,.156,.153) \tabularnewline
+
+\hline \hline
+\end{tabular}
+\caption{Baseline Parameter Values}
+\end{table}
+
+
+\pagebreak
+
+\section*{Part 3: Detailed Simulation Results}
+
+\subsection*{Detailed Results Underlying Table 2 in the Paper}
+
+\begin{table}[H]
+\centering
+\input{appendix_baseline.tex}
+\caption{Statistics from baseline scenario: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\pagebreak
+
+\subsection*{Detailed Results Underlying Table 3 in the Paper}
+
+\begin{table}[H]
+\centering
+\input{appendix_initfin.tex}
+\caption{Statistics from perfect knowledge scenario: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\pagebreak
+
+\subsection*{Detailed Results Underlying Table 4 in the Paper}
+
+
+\begin{table}[H]
+\centering
+\input{appendix_sens1.tex}
+\caption{Statistics from sensitivity scenario $(\sigma = 1.2)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens2.tex}
+\caption{Statistics from sensitivity scenario $(\sigma = 2.0)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens11.tex}
+\caption{Statistics from sensitivity scenario $(\beta = 0.95)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens12.tex}
+\caption{Statistics from sensitivity scenario $(\beta = 0.97)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens3.tex}
+\caption{Statistics from sensitivity scenario $(\delta = 0.03)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\input{appendix_sens4.tex}
+\caption{Statistics from sensitivity scenario $(\delta = 0.09)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\input{appendix_sens5.tex}
+\caption{Statistics from sensitivity scenario $(\pi_0 = 25)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens6.tex}
+\caption{Statistics from sensitivity scenario $(\pi_0 = 75)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens7.tex}
+\caption{Statistics from sensitivity scenario $(\pi_1 = 1.25)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens8.tex}
+\caption{Statistics from sensitivity scenario $(\pi_1 = 2.0)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens9.tex}
+\caption{Statistics from sensitivity scenario $(c_d = 1000)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens10.tex}
+\caption{Statistics from sensitivity scenario $(c_d = 500)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens13.tex}
+\caption{Statistics from sensitivity scenario $(\alpha = 0.9)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens14.tex}
+\caption{Statistics from sensitivity scenario $(\alpha = 0.75)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_sens15.tex}
+\caption{Statistics from sensitivity scenario $(\alpha = 0.5)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\subsection*{Detailed Results Underlying Table 5 in the Paper}
+
+\begin{table}[H]
+\centering
+\input{appendix_lowfloor.tex}
+\caption{Statistics from policy scenario with reduced consumption floor: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_ssgen.tex}
+\caption{Statistics from policy scenario with reduced retirement income: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+
+\pagebreak
+
+\subsection*{Detailed Results Underlying Figure 5 in the Paper}
+
+\begin{table}[H]
+\centering
+\input{appendix_stripdown.tex}
+\caption{Statistics from model with uncertainty only: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\input{appendix_hsz.tex}
+\caption{Statistics from model adding consumption floor: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_reprate.tex}
+\caption{Statistics from model adding differences in retirement replacement rates: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_demo.tex}
+\caption{Statistics from baseline scenario adding differences in demographics: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_mortality.tex}
+\caption{Statistics from baseline scenario adding differences in mortality: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+
+\pagebreak
+
+\subsection*{Detailed Results Underlying Figure 6 in the Paper}
+
+\begin{table}[H]
+\centering
+\input{appendix_zin.tex}
+\caption{Statistics from scenario with Epstein-Zin preferences: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\input{appendix_hetpref2.tex}
+\caption{Statistics from scenario with heterogeneity in preferences: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\pagebreak
+
+\subsection*{Detailed Results Underlying Figure 8 in the Paper}
+
+\begin{table}[H]
+\centering
+\input{appendix_learning1.tex}
+\caption{Statistics from scenario with learning-by-doing $(\phi = 5)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and  average net household income.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{appendix_learning2.tex}
+\caption{Statistics from scenario with learning-by-doing $(\phi = 10)$: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+
+
+
+\pagebreak
+
+\subsection*{Detailed Results Underlying Figure 9 in the Paper}
+
+\begin{table}[H]
+\centering
+\input{appendix_diverse.tex}
+\caption{Statistics from scenario with diversification benefits: median wealth, average financial knowledge, participation in sophisticated technology, average share of wealth devoted to sophisticated products conditional on participating, and average net household income.}
+\end{table}
+
+\end{document}  

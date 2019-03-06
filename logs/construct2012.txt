@@ -1,0 +1,310 @@
+------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/michaud/Dropbox (Personal)/emetrics/know/logs/construct201
+> 2.txt
+  log type:  text
+ opened on:  16 Oct 2015, 15:04:39
+
+. * load data
+. use "data/nfcs/restricted_2012FINRA.dta", clear
+
+. tab interest_question
+
+  Suppose you had |
+$100 in a savings |
+  account and the |
+interest rate was |
+     2% per year. |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+   More than $102 |     19,616       76.90       76.90
+     Exactly $102 |      1,773        6.95       83.85
+   Less than $102 |      1,347        5.28       89.13
+       Don't know |      2,516        9.86       98.99
+Prefer not to say |        257        1.01      100.00
+------------------+-----------------------------------
+            Total |     25,509      100.00
+
+. gen interest_right=0
+
+. replace interest_right=1 if interest_question==1
+(19616 real changes made)
+
+. tab inflation_question
+
+ Imagine that the |
+ interest rate on |
+     your savings |
+   account was 1% |
+     per year and |
+            infla |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+  More than today |      2,012        7.89        7.89
+ Exactly the same |      2,004        7.86       15.74
+  Less than today |     16,351       64.10       79.84
+       Don't know |      4,812       18.86       98.71
+Prefer not to say |        330        1.29      100.00
+------------------+-----------------------------------
+            Total |     25,509      100.00
+
+. gen inflation_right=0
+
+. replace inflation_right=1 if inflation_question==3
+(16351 real changes made)
+
+. tab risk_question
+
+  Buying a single |
+  company's stock |
+ usually provides |
+   a safer return |
+ than a stock mut |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+             True |      1,917        7.51        7.51
+            False |     13,056       51.18       58.70
+       Don't know |     10,329       40.49       99.19
+Prefer not to say |        207        0.81      100.00
+------------------+-----------------------------------
+            Total |     25,509      100.00
+
+. gen risk_right=0
+
+. replace risk_right=1 if risk_question==2
+(13056 real changes made)
+
+. tab mortgage_question
+
+        A 15-year |
+         mortgage |
+        typically |
+  requires higher |
+ monthly payments |
+   than a 30-year |
+              mor |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+             True |     19,785       77.56       77.56
+            False |      2,116        8.30       85.86
+       Don't know |      3,442       13.49       99.35
+Prefer not to say |        166        0.65      100.00
+------------------+-----------------------------------
+            Total |     25,509      100.00
+
+. gen mortgage_right=0
+
+. replace mortgage_right=1 if mortgage_question==1
+(19785 real changes made)
+
+. tab bond_question
+
+      If interest rates rise, what will |
+       typically happen to bond prices? |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                         They will rise |      4,948       19.40       19.40
+                         They will fall |      7,505       29.42       48.82
+                They will stay the same |      1,127        4.42       53.24
+There is no relationship between bond p |      2,197        8.61       61.85
+                             Don't know |      9,440       37.01       98.86
+                      Prefer not to say |        292        1.14      100.00
+----------------------------------------+-----------------------------------
+                                  Total |     25,509      100.00
+
+. gen bond_right=0
+
+. replace bond_right=1 if bond_question==2
+(7505 real changes made)
+
+. gen index5 = interest_right + inflation_right + risk_right + mortgage_right 
+> + bond_right
+
+. tab index5
+
+     index5 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      1,703        6.68        6.68
+          1 |      2,769       10.85       17.53
+          2 |      4,449       17.44       34.97
+          3 |      5,845       22.91       57.89
+          4 |      6,604       25.89       83.77
+          5 |      4,139       16.23      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. gen index3 = interest_right + inflation_right + risk_right 
+
+. tab index3
+
+     index3 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      3,053       11.97       11.97
+          1 |      5,473       21.46       33.42
+          2 |      7,399       29.01       62.43
+          3 |      9,584       37.57      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. gen all3right =0
+
+. replace all3right=1 if interest_right==1&inflation_right==1&risk_right==1
+(9584 real changes made)
+
+. tab all3right
+
+  all3right |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     15,925       62.43       62.43
+          1 |      9,584       37.57      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. gen all5right =0
+
+. replace all5right=1 if interest_right==1&inflation_right==1&risk_right==1&mo
+> rtgage_right==1&bond_right==1
+(4139 real changes made)
+
+. tab all5right
+
+  all5right |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     21,370       83.77       83.77
+          1 |      4,139       16.23      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. * generate demographics
+. tab ethnicity
+
+                              Ethnicity |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                     White non-Hispanic |     18,715       73.37       73.37
+                     Black non-Hispanic |      2,700       10.58       83.95
+                    Hispanic (any race) |      2,253        8.83       92.78
+                     Asian non-Hispanic |        946        3.71       96.49
+Other non-Hispanic (Native American, Ot |        895        3.51      100.00
+----------------------------------------+-----------------------------------
+                                  Total |     25,509      100.00
+
+. gen white =0
+
+. replace white =1 if ethnicity==1
+(18715 real changes made)
+
+. tab sex
+
+    What is |
+       your |
+    gender? |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       Male |     11,382       44.62       44.62
+     Female |     14,127       55.38      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. gen male=0
+
+. replace male=1 if sex==1
+(11382 real changes made)
+
+. sum age_2012
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+    age_2012 |     25509    47.00588    16.07551         18        101
+
+. gen age= age_2012
+
+. gen age2= age*age
+
+. gen age3= age2*age
+
+. tab education
+
+              education |      Freq.     Percent        Cum.
+------------------------+-----------------------------------
+    Did not complete HS |      1,903        7.46        7.46
+            HS graduate |      6,561       25.72       33.18
+           Some college |      8,419       33.00       66.18
+       College graduate |      5,343       20.95       87.13
+Post-graduate education |      3,283       12.87      100.00
+------------------------+-----------------------------------
+                  Total |     25,509      100.00
+
+. gen lths = 0
+
+. replace lths=1 if education==1
+(1903 real changes made)
+
+. tab lths
+
+       lths |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     23,606       92.54       92.54
+          1 |      1,903        7.46      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. gen hs = 0
+
+. replace hs=1 if education==2
+(6561 real changes made)
+
+. tab hs
+
+         hs |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     18,948       74.28       74.28
+          1 |      6,561       25.72      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. gen somecollege = 0
+
+. replace somecollege=1 if education==3
+(8419 real changes made)
+
+. tab somecollege
+
+somecollege |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     17,090       67.00       67.00
+          1 |      8,419       33.00      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. gen college = 0
+
+. replace college=1 if education==4
+(5343 real changes made)
+
+. tab college
+
+    college |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     20,166       79.05       79.05
+          1 |      5,343       20.95      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. gen morecollege = 0
+
+. replace morecollege=1 if education==5
+(3283 real changes made)
+
+. tab morecollege
+
+morecollege |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     22,226       87.13       87.13
+          1 |      3,283       12.87      100.00
+------------+-----------------------------------
+      Total |     25,509      100.00
+
+. * generate age dummies
+. egen age5 = cut(age), at(18 25(5)65 110)
+
+. gen year = 2012
+
+. save data/nfcs/nfcs2012.dta, replace
+file data/nfcs/nfcs2012.dta saved
+
+. 
+. capture log close

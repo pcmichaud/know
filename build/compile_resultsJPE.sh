@@ -1,0 +1,1 @@
+gfortran ../src/simulate27.f95 sorting.o -o resultsJPE
